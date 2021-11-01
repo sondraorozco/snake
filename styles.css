@@ -1,3 +1,12 @@
+/* 
+colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3
+    #802392 dark magenta    // headings
+    #995fa3 purpureus       // game border
+    #9a98b5 cool gray       // game board
+    #a0b9c6 pewter blue     // buttons
+    #a5f8d3 magic mint      // snake
+*/
+
 body {
     display: grid;
     grid-template-columns: 100px auto 1fr;
@@ -34,8 +43,17 @@ header, footer, aside, content {
     padding: 20px;
 }
 
+h1, h2, h3 {
+    color: #802392;
+}
+
+i {
+    color: #a0b9c6;
+    font-size: 2.5em;
+}
+
 .on{
-    background: orange;
+    background: #a5f8d3;
 }       
 
 .board {
@@ -49,4 +67,5 @@ header, footer, aside, content {
     padding: 2px;
     text-align: center;
     font-size: .5em;
+    background-color: #9a98b5;
 }

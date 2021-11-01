@@ -12,5 +12,5 @@ function createBoard() {
         board.appendChild(newDiv);
     }
 
-    board.style.border = "2px solid green";
+    board.style.border = "thick solid #995fa3";
 }
