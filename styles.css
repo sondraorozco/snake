@@ -1,0 +1,52 @@
+body {
+    display: grid;
+    grid-template-columns: 100px auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "hd hd hd"
+        "sd game gc"
+        "ft ft ft";
+    gap: 5px;
+    height: 90vh; /* sets height of grid to 90% of the vertical height (vh) */
+}
+
+.header {
+    grid-area: hd;
+}
+
+.sidebar {
+    grid-area: sd;
+}
+
+.game {
+    grid-area: game;
+}
+
+.game-content {
+    grid-area: gc;
+}
+
+.footer {
+    grid-area: ft;
+}
+
+header, footer, aside, content {
+    padding: 20px;
+}
+
+.on{
+    background: orange;
+}       
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(30,20px);
+    grid-template-rows: repeat(30,20px);
+}
+
+
+.boardCell {
+    padding: 2px;
+    text-align: center;
+    font-size: .5em;
+}
