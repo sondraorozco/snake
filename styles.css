@@ -39,7 +39,7 @@ body {
     grid-area: ft;
 }
 
-header, footer, aside, content {
+header, footer, aside, main {
     padding: 20px;
 }
 
@@ -61,7 +61,6 @@ i {
     grid-template-columns: repeat(30,20px);
     grid-template-rows: repeat(30,20px);
 }
-
 
 .boardCell {
     padding: 2px;
