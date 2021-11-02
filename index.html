@@ -9,24 +9,24 @@
 
 </head>
 
-<body>
+<body onload="createBoard()">
     <header class="header">
         <h1>Let's play snake!</h1>
     </header>
 
     <aside class="sidebar" id="button-bar">
-        <button type="button" class="btn btn-outline-primary" onclick="createBoard()">
+        <button type="button" class="btn btn-outline-primary" id="btn-start" onclick="start()">
             Start
         </button>
-        <button type="button" class="btn btn-outline-secondary" onclick="stop()">
+        <button type="button" class="btn btn-outline-secondary" id="btn-stop" onclick="stop()">
             Stop
         </button>
 
         <!-- arrow buttons for game play -->
-        <i class="bi bi-arrow-up-circle-fill"></i>
-        <i class="bi bi-arrow-left-circle-fill"></i>
-        <i class="bi bi-arrow-right-circle-fill"></i>
-        <i class="bi bi-arrow-down-circle-fill"></i>
+        <i class="bi bi-arrow-up-circle-fill" onclick="moveUp()"></i>
+        <i class="bi bi-arrow-left-circle-fill" onclick="moveLeft()"></i>
+        <i class="bi bi-arrow-right-circle-fill" onclick="moveRight()"></i>
+        <i class="bi bi-arrow-down-circle-fill" onclick="moveDown()"></i>
 
         
         
