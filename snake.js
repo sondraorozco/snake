@@ -1,28 +1,46 @@
-// all possible starting positions from left wall of board
-const startRight = [1, 31, 61, 91, 121, 151, 181, 211, 241, 271, 301, 331, 361, 391, 421, 451, 481, 511, 541, 571, 601, 631, 661, 691, 721, 751, 781, 811, 841, 871];   
-
-// array to hold position of snake's body as it moves on board
+// variables
+const boardCells = [];
 const snakeBody = [];
-
-const gridSize = 900;
-var position = 1;
-var lastPosition = null;
+const startPoints = [];
+const wallLength = 30;
+var startPosition = '';
+var position = '';
+var lastPosition = '';
 let snakeLength = 1;
 let timer = null;
+
 
 // creates the game board, to run on page load
 function createBoard() {
     const board = document.getElementById("target");
-
-    for (let i = 1; i <= gridSize; i++) {
-        let newDiv = document.createElement("div");
-        newDiv.classList.add('boardCell');
-        newDiv.innerHTML = i;
-        newDiv.id = 'n' + i;
-        board.appendChild(newDiv);
-    }
-
     board.style.border = "thick solid #995fa3";
+
+    // fill boardCells array with positions
+    for (let i = 0; i < wallLength; i++) {
+        boardCells[i] = [];
+        for (let j = 0; j < wallLength; j++) {
+            let cellPosition = i + '-' + j;
+            boardCells[i].push(cellPosition);
+
+            // add div element to board with id attribute matching cell position
+            let newDiv = document.createElement("div");
+            newDiv.classList.add('boardCell');
+            newDiv.innerHTML = cellPosition;
+            newDiv.id = cellPosition;
+            board.appendChild(newDiv);
+        }
+    }
+    
+    // fill array of possible starting positions
+    createStartPoints();
+}
+
+// creates an array of all possible starting points
+function createStartPoints() {
+    for (let i = 0; i < wallLength; i++) {
+        cellId = i + '-0';
+        startPoints.push(cellId);
+    }
 }
 
 // returns a random number
@@ -32,13 +50,13 @@ function randomStart(scale) {
 
 // chooses a random number from startRight array, sets that grid cell as the starting point and starts snake movement to right from the starting position
 function start() {
+    
     // get random starting positions
-    randomIndex = randomStart(startRight.length);
-    position = startRight[randomIndex];
-    console.log(position);
+    randomIndex = randomStart(startPoints.length);
+    startPosition = startPoints[randomIndex];
 
     // start snake from position
-    moveRight();
+    //moveRight();
 
     // disable "Start" button
     document.getElementById('btn-start').disabled = true;
@@ -50,7 +68,6 @@ function stop() {
 }
 
 function moveRight() {
-    let startPosition = position; // <-- NEED TO MOVE THIS. DOESN'T WORK HERE.
     timer = setTimeout( () => {
         if (position > startPosition + 30) {
             return position = startPosition;
@@ -65,7 +82,7 @@ function moveRight() {
 
 function toggle(position) {
     if (position < 1) return;
-    let idName = 'n' + position;
+    let idName = position;
     let element = document.getElementById(idName);
     element.classList.toggle('on');
 }
