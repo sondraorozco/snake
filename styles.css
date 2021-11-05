@@ -9,11 +9,11 @@ colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3
 
 body {
     display: grid;
-    grid-template-columns: 100px auto 1fr;
+    grid-template-columns: auto 100px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
         "hd hd hd"
-        "sd game gc"
+        "game sd gc"
         "ft ft ft";
     gap: 5px;
     height: 90vh; /* sets height of grid to 90% of the vertical height (vh) */
@@ -26,6 +26,7 @@ body {
 
 .sidebar {
     grid-area: sd;
+    text-align: center;
 }
 
 .game {
@@ -53,9 +54,17 @@ i {
     font-size: 2.5em;
 }
 
-.on{
+button {
+    margin: 4px 0;
+}
+
+.on {
     background: #a5f8d3;
 }       
+
+.off {
+    background: #9a98b5;
+}
 
 .board {
     display: grid;
@@ -67,5 +76,4 @@ i {
     padding: 0;
     text-align: center;
     font-size: .3em;
-    /* background: #9a98b5; */
 }

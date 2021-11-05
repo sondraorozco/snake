@@ -25,9 +25,11 @@ function createBoard() {
             // add div element to board with id attribute matching cell position
             let newDiv = document.createElement("div");
             newDiv.classList.add('boardCell');
-            newDiv.innerHTML = cellPosition;
+            newDiv.classList.add('off');
             newDiv.id = cellPosition;
+            //newDiv.innerHTML = cellPosition; // for troubleshooting to see cell coordinates
             board.appendChild(newDiv);
+
         }
     }
     
