@@ -62,7 +62,8 @@ button {
     background: #a5f8d3;
 }       
 
-.off {
+/* sets background color of game board when 'on' class not applied */
+.bg {
     background: #9a98b5;
 }
 

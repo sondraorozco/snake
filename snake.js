@@ -1,11 +1,8 @@
 // variables
 const boardCells = [];
 const snakeBody = [];
-const startPoints = [];
 const wallLength = 30;
-var startPosition = '';
-var position = '';
-var lastPosition = '';
+let direction = '';
 let snakeLength = 1;
 let timer = null;
 
@@ -16,75 +13,92 @@ function createBoard() {
     board.style.border = "thick solid #995fa3";
 
     // fill boardCells array with positions
-    for (let i = 0; i < wallLength; i++) {
+    for (let i = 1; i <= wallLength; i++) {
         boardCells[i] = [];
-        for (let j = 0; j < wallLength; j++) {
-            let cellPosition = i + '-' + j;
-            boardCells[i].push(cellPosition);
+        for (let j = 1; j <= wallLength; j++) {
+            let id = j + '-' + i;
+            boardCells[i].push( {col: j, row: i, id: id } );
 
             // add div element to board with id attribute matching cell position
             let newDiv = document.createElement("div");
             newDiv.classList.add('boardCell');
-            newDiv.classList.add('off');
-            newDiv.id = cellPosition;
-            //newDiv.innerHTML = cellPosition; // for troubleshooting to see cell coordinates
+            newDiv.classList.add('bg');
+            newDiv.id = id;
+            newDiv.innerHTML = id; // for troubleshooting to see cell coordinates
             board.appendChild(newDiv);
-
         }
     }
-    
-    // fill array of possible starting positions
-    createStartPoints();
 }
 
-// creates an array of all possible starting points
-function createStartPoints() {
-    for (let i = 0; i < wallLength; i++) {
-        cellId = i + '-0';
-        startPoints.push(cellId);
-    }
-}
 
 // returns a random number
-function randomStart(scale) {
+function random(scale) {
     return Math.floor(Math.random() * scale);
 }
 
-// chooses a random number from startRight array, sets that grid cell as the starting point and starts snake movement to right from the starting position
+// starts snake movement to right from a randomly selected starting position
 function start() {
-    
-    // get random starting positions
-    randomIndex = randomStart(startPoints.length);
-    startPosition = startPoints[randomIndex];
+    // get random starting position
+    rand = random(wallLength);
+    let startPosition = boardCells[rand][0];
+    snakeBody.push(startPosition);
+    toggle(snakeBody[0].id);
 
-    // start snake from position
-    //moveRight();
+    // start moving right
+    direction = 'right';
+    move();
 
     // disable "Start" button
     document.getElementById('btn-start').disabled = true;
 }
 
+// clears timer and clears the snakeBody array
 function stop() {
     clearTimeout(timer);
+    snakeBody.splice(0, snakeBody.length); 
     document.getElementById('btn-start').disabled = false;
 }
 
-function moveRight() {
+function clickDirection(setDirection) {
+    clearTimeout(timer);
+    direction = setDirection;
+    move();
+}
+
+function move() {
     timer = setTimeout( () => {
-        if (position > startPosition + 30) {
-            return position = startPosition;
-        };
-        toggle(position);
-        toggle(lastPosition);
-        lastPosition = position;
-        position += 1;
-        moveRight();
-    }, 200);
+        let y = snakeBody[0].row;
+        let x = snakeBody[0].col;
+
+        // set coordinates of next position based on direction to move
+        if (direction === 'right') {
+            x = (x === 30) ? 1 : x + 1;
+        } else if (direction === 'left') {
+            x = (x === 1) ? 30 : x - 1;
+        } else if (direction === 'up') {
+            y = (y === 1) ? 30 : y - 1;
+        } else if (direction === 'down') {
+            y = (y === 30) ? 1 : y + 1;
+        } else {
+            return;
+        }
+
+        let nextPosition = {row: y, col: x, id: x + '-' + y };
+
+        // add next position to snakeBody and toggle 'on' class in cell
+        snakeBody.unshift(nextPosition);
+        toggle(snakeBody[0].id);
+
+        // remove tail of snake with pop()
+        let pop = snakeBody.pop().id;
+        toggle(pop);
+
+        move();
+    }, 200)
 }
 
 function toggle(position) {
-    if (position < 1) return;
-    let idName = position;
-    let element = document.getElementById(idName);
+    let element = document.getElementById(position);
+    element.classList.toggle('bg');
     element.classList.toggle('on');
 }
