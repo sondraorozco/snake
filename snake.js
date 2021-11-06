@@ -1,4 +1,3 @@
-// variables
 const boardCells = [];
 const snakeBody = [];
 const wallLength = 30;
@@ -8,6 +7,7 @@ let snakeLength = 10;
 let timer = null;
 let score = 0;
 let speed = 200;    // set to 200ms to start, can decrease to increase difficulty
+let paused = false;
 var alertPlaceholder = document.getElementById('gameOverAlertPlaceholder');
 
 // creates the game board, to run on page load
@@ -42,51 +42,65 @@ function getRandom(min, max) {
 
 // starts snake movement to right from a randomly selected starting position
 function start() {
-    // get random starting position
+    // get random starting position for snake
     rand = getRandom(1, wallLength);
     let startPosition = boardCells[rand][0];
     snakeBody.push(startPosition);
     toggle(snakeBody[0].id);
 
-    // start moving right
+    // add token to board
+    newToken();
+
+    // start moving snake to right
     direction = 'right';
     move();
 
-    // disable "Start" button
+    // disable "Start" button, enable "Pause" button
     document.getElementById('btn-start').disabled = true;
-    newToken();
+    document.getElementById('btn-pause').disabled = false;
 }
 
 function pause() {
-    clearTimeout(timer);
-    document.getElementById('btn-unpause').disabled = false;
-}
-
-function unpause() {
-    move();
-    document.getElementById('btn-unpause').disabled = true;
+    if (!paused) {
+        // pause game on button click if game is not already paused
+        clearTimeout(timer);
+        paused = true;
+        document.getElementById('btn-pause').innerHTML = 'Resume';
+    } else if (paused) {
+        move(); 
+        paused = false;
+        document.getElementById('btn-pause').innerHTML = 'Pause';
+    }
 }
 
 // clears timer and clears the snakeBody array
 function stop() {
+    // stop timer, clear snake and tokens from board, clear snakeBody array
     clearTimeout(timer);
-    document.getElementById('btn-start').disabled = false;
-    document.getElementById('btn-unpause').disabled = true;
-
-    // clear snake from board, clear array, remove token, reset score
     snakeBody.forEach( (el) => toggle(el.id) );
     snakeBody.splice(0, snakeBody.length); 
     document.getElementById(token.id).innerHTML = '';
+    
+    // reset score
     score = 0;
     showNewScore();
+
+    // reset pause if paused is true
+    if (paused) {
+        pause();
+    }
+
+    // reset buttons
+    document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-pause').disabled = true;
 }
 
+// update direction of snake based on user input
 function clickDirection(setDirection) {
     clearTimeout(timer);
     direction = setDirection;
     move();
 }
-
 
 function move() {
     timer = setTimeout( () => {
@@ -127,6 +141,7 @@ function move() {
     }, speed)
 }
 
+// changes div background color to animate the snake's movement
 function toggle(position) {
     let element = document.getElementById(position);
     element.classList.toggle('bg');
@@ -141,26 +156,19 @@ function newToken() {
     token = {col: col, row: row, id: id};
 
     if (checkBodyCollision(token)) {
-        newToken();
+        newToken();     // create a new token if overlap with snake body
     } else {
         document.getElementById(token.id).innerHTML = '<i class="bi bi-apple token"></i>';
     }
 }
 
-function randomPosition(obj) {
-    let col = getRandom(1, wallLength);
-    let row = getRandom(1, wallLength);
-    let id = col + '-' + row;
-    obj = {col: col, row: row, id: id};
-}
-
 function checkTokenCollision() {
     if (token.id === snakeBody[0].id) {
-        snakeLength += 1;
-        score += 100;
-        showNewScore();
-        document.getElementById(token.id).innerHTML = ''; // clear current token
-        newToken(); // generate new token
+        snakeLength += 1;   // grow snake
+        score += 100;       // increase score
+        showNewScore();     // update score displayed on page
+        document.getElementById(token.id).innerHTML = ''; // remove token from board
+        newToken();         // generate new token
     }
 }
 
@@ -179,12 +187,9 @@ function checkBodyCollision(position) {
 
 function gameOver() {
     pause();
-    document.getElementById('btn-start').disabled = true;
+    alert('Game Over! Try again!', 'danger');   // show game over alert
+    document.getElementById('btn-start').disabled = true; // update button availability
     document.getElementById('btn-pause').disabled = true;
-    document.getElementById('btn-unpause').disabled = true;
-
-    // show game over alert
-    alert('Game Over! Try again!', 'danger');
 }
 
 function alert(message, type) {
