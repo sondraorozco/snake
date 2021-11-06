@@ -135,9 +135,10 @@ function newToken() {
 
 function checkTokenCollision() {
     if (token.id === snakeBody[0].id) {
-        document.getElementById(token.id).innerHTML = '';
-        newToken();
         score += 100;
         document.getElementById('current-score').innerHTML = score;
+        snakeLength += 1;
+        document.getElementById(token.id).innerHTML = '';
+        newToken();
     }
 }
