@@ -73,10 +73,12 @@ function stop() {
     document.getElementById('btn-start').disabled = false;
     document.getElementById('btn-unpause').disabled = true;
 
-    // clear snake from board, clear array, and remove token
+    // clear snake from board, clear array, remove token, reset score
     snakeBody.forEach( (el) => toggle(el.id) );
     snakeBody.splice(0, snakeBody.length); 
     document.getElementById(token.id).innerHTML = '';
+    score = 0;
+    showNewScore();
 }
 
 function clickDirection(setDirection) {
@@ -145,11 +147,15 @@ function newToken() {
 function checkTokenCollision() {
     if (token.id === snakeBody[0].id) {
         score += 100;
-        document.getElementById('current-score').innerHTML = score;
+        showNewScore();
         snakeLength += 1;
         document.getElementById(token.id).innerHTML = '';
         newToken();
     }
+}
+
+function showNewScore() {
+    document.getElementById('current-score').innerHTML = score;
 }
 
 // check if new position collides with any part of the existing snake body
