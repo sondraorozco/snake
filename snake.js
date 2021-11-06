@@ -104,18 +104,22 @@ function move() {
 
         let nextPosition = {row: y, col: x, id: x + '-' + y };
 
-        // add next position to snakeBody and toggle 'on' class in cell
-        snakeBody.unshift(nextPosition);
-        toggle(snakeBody[0].id);
-        checkTokenCollision();
+        if (checkBodyCollision(nextPosition)) {
+            gameOver();
+        } else {
+            // add next position to snakeBody and toggle 'on' class in cell
+            snakeBody.unshift(nextPosition);
+            toggle(snakeBody[0].id);
+            checkTokenCollision();
 
-        // remove tail of snake with pop()
-        if (snakeBody.length > snakeLength) {
-            let pop = snakeBody.pop().id;
-            toggle(pop);
+            // remove tail of snake with pop()
+            if (snakeBody.length > snakeLength) {
+                let pop = snakeBody.pop().id;
+                toggle(pop);
+            }
+
+            move();
         }
-
-        move();
     }, 200)
 }
 
@@ -144,4 +148,32 @@ function checkTokenCollision() {
         document.getElementById(token.id).innerHTML = '';
         newToken();
     }
+}
+
+// check if new position collides with any part of the existing snake body
+function checkBodyCollision(nextPosition) {
+    for (let i = 1; i < snakeBody.length; i++) {
+        if (nextPosition.id === snakeBody[i].id) {
+            return true;
+        }
+    }
+}
+
+function gameOver() {
+    pause();
+    document.getElementById('btn-start').disabled = true;
+    document.getElementById('btn-pause').disabled = true;
+    document.getElementById('btn-unpause').disabled = true;
+
+    // show game over alert
+    alert('Game Over! Try again!', 'danger');
+}
+
+var alertPlaceholder = document.getElementById('gameOverAlertPlaceholder')
+
+function alert(message, type) {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+
+  alertPlaceholder.append(wrapper)
 }
