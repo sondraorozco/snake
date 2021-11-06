@@ -140,17 +140,27 @@ function newToken() {
     let id = col + '-' + row;
     token = {col: col, row: row, id: id};
 
-    // update div to display something to represent the token
-    document.getElementById(token.id).innerHTML = '<i class="bi bi-apple token"></i>';
+    if (checkBodyCollision(token)) {
+        newToken();
+    } else {
+        document.getElementById(token.id).innerHTML = '<i class="bi bi-apple token"></i>';
+    }
+}
+
+function randomPosition(obj) {
+    let col = getRandom(1, wallLength);
+    let row = getRandom(1, wallLength);
+    let id = col + '-' + row;
+    obj = {col: col, row: row, id: id};
 }
 
 function checkTokenCollision() {
     if (token.id === snakeBody[0].id) {
+        snakeLength += 1;
         score += 100;
         showNewScore();
-        snakeLength += 1;
-        document.getElementById(token.id).innerHTML = '';
-        newToken();
+        document.getElementById(token.id).innerHTML = ''; // clear current token
+        newToken(); // generate new token
     }
 }
 
@@ -159,9 +169,9 @@ function showNewScore() {
 }
 
 // check if new position collides with any part of the existing snake body
-function checkBodyCollision(nextPosition) {
+function checkBodyCollision(position) {
     for (let i = 1; i < snakeBody.length; i++) {
-        if (nextPosition.id === snakeBody[i].id) {
+        if (position.id === snakeBody[i].id) {
             return true;
         }
     }
