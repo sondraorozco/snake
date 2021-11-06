@@ -55,8 +55,11 @@ function start() {
 // clears timer and clears the snakeBody array
 function stop() {
     clearTimeout(timer);
-    snakeBody.splice(0, snakeBody.length); 
     document.getElementById('btn-start').disabled = false;
+
+    // clear snake from board and clear array
+    snakeBody.forEach( (el) => toggle(el.id) );
+    snakeBody.splice(0, snakeBody.length); 
 }
 
 function clickDirection(setDirection) {
