@@ -12,7 +12,7 @@ let score = 0;
 // creates the game board, to run on page load
 function createBoard() {
     const board = document.getElementById("target");
-    board.style.border = "thick solid #995fa3";
+    board.style.border = "thick solid #231123";
 
     // fill boardCells array with positions
     for (let i = 1; i <= wallLength; i++) {

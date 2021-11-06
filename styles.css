@@ -1,11 +1,5 @@
 /* 
-colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3-e79f17-010400
-    #802392 dark magenta    // headings
-    #995fa3 purpureus       // game border
-    #9a98b5 cool gray       // game board
-    #a0b9c6 pewter blue     // buttons
-    #a5f8d3 magic mint      // snake
-    #EDF67D                 // token
+https://coolors.co/231123-82204a-558c8c-e8db7d-eff7ff
 */
 
 body {
@@ -42,7 +36,7 @@ header, footer, aside, main {
 }
 
 h1, h2, h3 {
-    color: #802392;
+    color: #231123;
 }
 
 button {
@@ -56,12 +50,12 @@ button {
 }
 
 .on {
-    background: #a5f8d3;
+    background: #558C8C;
 }       
 
 /* sets background color of game board when 'on' class not applied */
 .bg {
-    background: #a0b9c6;
+    background: #EFF7FF;
 }
 
 .boardCell {
@@ -103,7 +97,7 @@ button {
 }
 
 .token {
-    color: #EDF67D;
+    color: #82204A;
     font-size: 1em;
     font-weight: bolder;
 }
