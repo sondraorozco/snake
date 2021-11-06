@@ -17,39 +17,72 @@
         <h1>Let's play snake!</h1>
     </header>
 
-    <aside class="sidebar" id="button-bar">
-        <button type="button" class="btn btn-outline-primary" id="btn-start" onclick="start()">
-            Start
-        </button>
-        <button type="button" class="btn btn-outline-secondary" id="btn-stop" onclick="stop()">
-            Stop
-        </button>
-
-        <!-- arrow buttons for game play -->
-        <i class="bi bi-arrow-up-circle-fill" onclick="clickDirection('up')"></i>
-        <i class="bi bi-arrow-left-circle-fill" onclick="clickDirection('left')"></i>
-        <i class="bi bi-arrow-right-circle-fill" onclick="clickDirection('right')"></i>
-        <i class="bi bi-arrow-down-circle-fill" onclick="clickDirection('down')"></i>
-
-        
-        
-    </aside>
-    
     <main class="game">
         <div class="board" id="target">
             <!-- board builds here -->
         </div>
     </main>
 
-    <aside class="game-content">
-        <h2>How to play</h2>
-        <p>
-            Click the "Start" button to start the game. Then use the arrow buttons or the arrows on your keyboard to change the snake's direction. Click the "Stop" button if you want to end the game.
-        </p>
-        <p>
-            Ready? Let's go!!
-        </p>
+    <aside class="sidebar">
+        <div class="content">
+            <div class="buttons-main">
+                <button type="button" class="btn btn-outline-primary" id="btn-start" onclick="start()">
+                    Start Game
+                </button>
+                
+                <button type="button" class="btn btn-outline-secondary" id="btn-pause" onclick="pause()">
+                    Pause
+                </button>
+                
+                <button type="button" class="btn btn-outline-secondary" id="btn-unpause" onclick="unpause()" disabled>
+                    Unpause
+                </button>
+
+                <button type="button" class="btn btn-outline-danger" id="btn-stop" onclick="stop()">
+                    End Game
+                </button>
+            </div>
+
+            <!-- arrow buttons for game play -->
+            <div class="button-arrows">
+                <div class="arrow-row">
+                    <center>
+                        <button type="button" class="btn btn-outline-primary" onclick="clickDirection('up')"><i class="bi-arrow-up"></i></button>
+                    </center>
+                </div>
+                <div class="arrow-row">
+                    <center>
+                        <button type="button" class="btn btn-outline-primary" onclick="clickDirection('left')"><i class="bi-arrow-left"></i></button>
+                        
+                        <button type="button" class="btn btn-outline-primary" onclick="clickDirection('right')"><i class="bi-arrow-right"></i> </button>
+                    </center>
+                </div>
+                <div class="arrow-row">
+                    <center>
+                        <button type="button" class="btn btn-outline-primary" onclick="clickDirection('down')"><i class="bi-arrow-down"></i> </button>        
+                    </center>
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="instructions">
+                <h2>How to play</h2>
+                <p>
+                    Click the "Start" button to start the game. Then use the arrow buttons or the arrows on your keyboard to change the snake's direction. Click the "Stop" button if you want to end the game.
+                </p>
+                <p>
+                    Ready? Let's go!!
+                </p>
+            </div>
+
+            <div class="top-scores">
+                <h2>Top Scores!</h2>
+                <p>Coming soon... </p>
+            </div>
+        </div>
     </aside>
+    
     <footer class="footer">Footer</footer>
 
     <script src="./snake.js"></script>

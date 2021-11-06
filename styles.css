@@ -9,12 +9,12 @@ colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3
 
 body {
     display: grid;
-    grid-template-columns: auto 100px 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
-        "hd hd hd"
-        "game sd gc"
-        "ft ft ft";
+        "hd hd"
+        "game sd"
+        "ft ft";
     gap: 5px;
     height: 90vh; /* sets height of grid to 90% of the vertical height (vh) */
     font-family: 'Architects Daughter', cursive;
@@ -26,15 +26,10 @@ body {
 
 .sidebar {
     grid-area: sd;
-    text-align: center;
 }
 
 .game {
     grid-area: game;
-}
-
-.game-content {
-    grid-area: gc;
 }
 
 .footer {
@@ -49,13 +44,14 @@ h1, h2, h3 {
     color: #802392;
 }
 
-i {
-    color: #a0b9c6;
-    font-size: 2.5em;
-}
-
 button {
     margin: 4px 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(30,20px);
+    grid-template-rows: repeat(30,20px);
 }
 
 .on {
@@ -67,14 +63,40 @@ button {
     background: #9a98b5;
 }
 
-.board {
-    display: grid;
-    grid-template-columns: repeat(30,20px);
-    grid-template-rows: repeat(30,20px);
-}
-
 .boardCell {
     padding: 0;
     text-align: center;
     font-size: .3em;
+}
+
+.content {
+    display:grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: 
+        "bt bt"
+        "arr sp"
+        "ins ins"
+        "ts ts";
+    row-gap: 40px;
+}
+
+.buttons-main {
+    grid-area: bt;
+}
+
+.buttons-arrows {
+    grid-area: arr;
+}
+
+.instructions {
+    grid-area: ins;
+}
+
+.top-scores {
+    grid-area: ts;
+}
+
+.spacer {
+    grid-area: sp;
 }

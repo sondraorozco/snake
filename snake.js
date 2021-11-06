@@ -50,10 +50,21 @@ function start() {
     document.getElementById('btn-start').disabled = true;
 }
 
+function pause() {
+    clearTimeout(timer);
+    document.getElementById('btn-unpause').disabled = false;
+}
+
+function unpause() {
+    move();
+    document.getElementById('btn-unpause').disabled = true;
+}
+
 // clears timer and clears the snakeBody array
 function stop() {
     clearTimeout(timer);
     document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-unpause').disabled = true;
 
     // clear snake from board and clear array
     snakeBody.forEach( (el) => toggle(el.id) );
