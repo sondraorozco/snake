@@ -7,7 +7,8 @@ let direction = '';
 let snakeLength = 10;
 let timer = null;
 let score = 0;
-
+let speed = 200;    // set to 200ms to start, can decrease to increase difficulty
+var alertPlaceholder = document.getElementById('gameOverAlertPlaceholder');
 
 // creates the game board, to run on page load
 function createBoard() {
@@ -120,7 +121,7 @@ function move() {
 
             move();
         }
-    }, 200)
+    }, speed)
 }
 
 function toggle(position) {
@@ -168,8 +169,6 @@ function gameOver() {
     // show game over alert
     alert('Game Over! Try again!', 'danger');
 }
-
-var alertPlaceholder = document.getElementById('gameOverAlertPlaceholder')
 
 function alert(message, type) {
   var wrapper = document.createElement('div')
