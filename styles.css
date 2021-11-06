@@ -1,10 +1,11 @@
 /* 
-colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3
+colors: https://coolors.co/802392-995fa3-9a98b5-a0b9c6-a5f8d3-e79f17-010400
     #802392 dark magenta    // headings
     #995fa3 purpureus       // game border
     #9a98b5 cool gray       // game board
     #a0b9c6 pewter blue     // buttons
     #a5f8d3 magic mint      // snake
+    #EDF67D                 // token
 */
 
 body {
@@ -60,13 +61,12 @@ button {
 
 /* sets background color of game board when 'on' class not applied */
 .bg {
-    background: #9a98b5;
+    background: #a0b9c6;
 }
 
 .boardCell {
     padding: 0;
     text-align: center;
-    font-size: .3em;
 }
 
 .content {
@@ -75,7 +75,7 @@ button {
     grid-template-rows: repeat(4, auto);
     grid-template-areas: 
         "bt bt"
-        "arr sp"
+        "arr sc"
         "ins ins"
         "ts ts";
     row-gap: 40px;
@@ -97,6 +97,13 @@ button {
     grid-area: ts;
 }
 
-.spacer {
-    grid-area: sp;
+.score {
+    grid-area: sc;
+    text-align: center;
+}
+
+.token {
+    color: #EDF67D;
+    font-size: 1em;
+    font-weight: bolder;
 }

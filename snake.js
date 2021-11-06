@@ -2,9 +2,11 @@
 const boardCells = [];
 const snakeBody = [];
 const wallLength = 30;
+let token = {};
 let direction = '';
 let snakeLength = 10;
 let timer = null;
+let score = 0;
 
 
 // creates the game board, to run on page load
@@ -48,6 +50,7 @@ function start() {
 
     // disable "Start" button
     document.getElementById('btn-start').disabled = true;
+    newToken();
 }
 
 function pause() {
@@ -66,9 +69,10 @@ function stop() {
     document.getElementById('btn-start').disabled = false;
     document.getElementById('btn-unpause').disabled = true;
 
-    // clear snake from board and clear array
+    // clear snake from board, clear array, and remove token
     snakeBody.forEach( (el) => toggle(el.id) );
     snakeBody.splice(0, snakeBody.length); 
+    document.getElementById(token.id).innerHTML = '';
 }
 
 function clickDirection(setDirection) {
@@ -100,6 +104,7 @@ function move() {
         // add next position to snakeBody and toggle 'on' class in cell
         snakeBody.unshift(nextPosition);
         toggle(snakeBody[0].id);
+        checkTokenCollision();
 
         // remove tail of snake with pop()
         if (snakeBody.length > snakeLength) {
@@ -115,4 +120,24 @@ function toggle(position) {
     let element = document.getElementById(position);
     element.classList.toggle('bg');
     element.classList.toggle('on');
+}
+
+function newToken() {
+    // get random x and y coordinates
+    let col = random(wallLength);
+    let row = random(wallLength);
+    let id = col + '-' + row;
+    token = {col: col, row: row, id: id};
+
+    // update div to display something to represent the token
+    document.getElementById(token.id).innerHTML = '<i class="bi bi-apple token"></i>';
+}
+
+function checkTokenCollision() {
+    if (token.id === snakeBody[0].id) {
+        document.getElementById(token.id).innerHTML = '';
+        newToken();
+        score += 100;
+        document.getElementById('current-score').innerHTML = score;
+    }
 }
