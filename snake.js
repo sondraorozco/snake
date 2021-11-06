@@ -85,6 +85,7 @@ function clickDirection(setDirection) {
     move();
 }
 
+
 function move() {
     timer = setTimeout( () => {
         let y = snakeBody[0].row;

@@ -91,6 +91,26 @@
 
     <script src="./snake.js"></script>
 
+    <!-- Add event listeners for keyboard play -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'ArrowUp') {
+                clickDirection('up');
+            } else if (event.code === 'ArrowDown') {
+                clickDirection('down');
+            } else if (event.code === 'ArrowLeft') {
+                clickDirection('left');
+            } else if (event.code === 'ArrowRight') {
+                clickDirection('right');
+            } else if (event.code === 'Space') {
+                pause();
+            } else {
+                return;
+            }
+            event.preventDefault();
+        });
+    </script>
+
     <!-- Bootstrap JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
