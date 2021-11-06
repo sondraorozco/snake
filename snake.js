@@ -3,7 +3,7 @@ const boardCells = [];
 const snakeBody = [];
 const wallLength = 30;
 let direction = '';
-let snakeLength = 1;
+let snakeLength = 10;
 let timer = null;
 
 
@@ -24,12 +24,10 @@ function createBoard() {
             newDiv.classList.add('boardCell');
             newDiv.classList.add('bg');
             newDiv.id = id;
-            newDiv.innerHTML = id; // for troubleshooting to see cell coordinates
             board.appendChild(newDiv);
         }
     }
 }
-
 
 // returns a random number
 function random(scale) {
@@ -93,8 +91,10 @@ function move() {
         toggle(snakeBody[0].id);
 
         // remove tail of snake with pop()
-        let pop = snakeBody.pop().id;
-        toggle(pop);
+        if (snakeBody.length > snakeLength) {
+            let pop = snakeBody.pop().id;
+            toggle(pop);
+        }
 
         move();
     }, 200)
