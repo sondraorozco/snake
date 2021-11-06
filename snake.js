@@ -31,15 +31,18 @@ function createBoard() {
     }
 }
 
-// returns a random number
-function random(scale) {
-    return Math.floor(Math.random() * scale);
-}
+// returns a random number inclusive of min and max
+function getRandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+  }
+
 
 // starts snake movement to right from a randomly selected starting position
 function start() {
     // get random starting position
-    rand = random(wallLength);
+    rand = getRandom(1, wallLength);
     let startPosition = boardCells[rand][0];
     snakeBody.push(startPosition);
     toggle(snakeBody[0].id);
@@ -124,8 +127,8 @@ function toggle(position) {
 
 function newToken() {
     // get random x and y coordinates
-    let col = random(wallLength);
-    let row = random(wallLength);
+    let col = getRandom(1, wallLength);
+    let row = getRandom(1, wallLength);
     let id = col + '-' + row;
     token = {col: col, row: row, id: id};
 
