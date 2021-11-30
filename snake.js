@@ -60,41 +60,6 @@ function start() {
     document.getElementById('btn-pause').disabled = false;
 }
 
-function pause() {
-    if (!paused) {
-        // pause game on button click if game is not already paused
-        clearTimeout(timer);
-        paused = true;
-        document.getElementById('btn-pause').innerHTML = 'Resume';
-    } else if (paused) {
-        move(); 
-        paused = false;
-        document.getElementById('btn-pause').innerHTML = 'Pause';
-    }
-}
-
-// clears timer and clears the snakeBody array
-function stop() {
-    // stop timer, clear snake and tokens from board, clear snakeBody array
-    clearTimeout(timer);
-    snakeBody.forEach( (el) => toggle(el.id) );
-    snakeBody.splice(0, snakeBody.length); 
-    document.getElementById(token.id).innerHTML = '';
-    
-    // reset score
-    score = 0;
-    showNewScore();
-
-    // reset pause if paused is true
-    if (paused) {
-        pause();
-    }
-
-    // reset buttons
-    document.getElementById('btn-start').disabled = false;
-    document.getElementById('btn-pause').disabled = true;
-}
-
 // update direction of snake based on user input
 function clickDirection(setDirection) {
     clearTimeout(timer);
@@ -146,6 +111,42 @@ function toggle(position) {
     let element = document.getElementById(position);
     element.classList.toggle('bg');
     element.classList.toggle('on');
+}
+
+function pause() {
+    if (!paused) {
+        // pause game on button click if game is not already paused
+        clearTimeout(timer);
+        paused = true;
+        document.getElementById('btn-pause').innerHTML = 'Resume';
+    } else if (paused) {
+        move(); 
+        paused = false;
+        document.getElementById('btn-pause').innerHTML = 'Pause';
+    }
+}
+
+// clears timer and clears the snakeBody array
+function stop() {
+    // stop timer, clear snake and tokens from board, clear snakeBody array, reset snakeLength to 10
+    clearTimeout(timer);
+    snakeBody.forEach( (el) => toggle(el.id) );
+    snakeBody.splice(0, snakeBody.length); 
+    snakeLength = 10;
+    document.getElementById(token.id).innerHTML = '';
+    
+    // reset score
+    score = 0;
+    showNewScore();
+
+    // reset pause if paused is true
+    if (paused) {
+        pause();
+    }
+
+    // reset buttons
+    document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-pause').disabled = true;
 }
 
 function newToken() {

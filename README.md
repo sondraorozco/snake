@@ -12,4 +12,5 @@ You can run this code locally by downloading all of the files here to a single d
 - [ ] Update "Top Scores" section of the page to display scores and names of top scorers
 - [ ] Add levels to the game, with snake speed increasing at each level
 - [ ] Replace "Game Over" alert banner with a modal
-- [ ] Fix bug: ending the game doesn't reset length of the snake
+- [ ] Add unit tests
+- [x] Fix bug: ending the game doesn't reset length of the snake
